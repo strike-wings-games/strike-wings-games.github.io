@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strike Wings — A Space-Combat Epic. Wishlist on Steam.</title>
+  <meta name="description" content="Sol, 2205. Earth has a church. Mars has a shipyard. Strike Wings is a top-down space-combat epic: 50+ warships, fleet actions, capital ships you dismantle subsystem by subsystem, and a civil war in its seventeenth year. Wishlist on Steam.">
+  <meta name="theme-color" content="#050608">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="STRIKE WINGS — The war is in its seventeenth year.">
+  <meta property="og:description" content="A top-down space-combat epic. 50+ warships. Fleet actions. Capital ships you dismantle subsystem by subsystem. Wishlist on Steam.">
+  <meta property="og:url" content="https://strike-wings-games.github.io/">
+  <meta property="og:image" content="https://strike-wings-games.github.io/assets/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://strike-wings-games.github.io/assets/og.jpg">
+  <link rel="canonical" href="https://strike-wings-games.github.io/">
+  <meta name="color-scheme" content="dark">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/favicon-180.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+    document.documentElement.classList.add("js");
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("intro-on");
+  </script>
+</head>
+<body>
+
+  <!-- opening rite -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-top"></div>
+    <div class="intro-bottom"></div>
+    <div class="intro-center">
+      <p class="intro-kicker">SOL &middot; 2205</p>
+      <div class="intro-rule"></div>
+      <p class="intro-sub">THE SEVENTEENTH YEAR OF THE CIVIL WAR</p>
+    </div>
+  </div>
+
+  <!-- quiet static starfield -->
+  <canvas id="sky" aria-hidden="true"></canvas>
+
+  <!-- reticle cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor-dot"></span>
+    <span class="cursor-ring"></span>
+  </div>
+
+  <!-- Top bar -->
+  <header class="topbar" id="topbar">
+    <a class="topbar-brand" href="#top" aria-label="Strike Wings — back to top">STRIKE&nbsp;WINGS</a>
+    <nav class="topbar-nav" aria-label="Sections">
+      <a href="#war">The War</a>
+      <a href="#game">The Game</a>
+      <a href="#registry">Ships</a>
+      <a href="#trailer">Trailer</a>
+      <a href="#factions">Factions</a>
+    </nav>
+    <a class="steam-link btn btn-steam btn-small" href="#" rel="noopener" target="_blank">
+      <svg class="steam-glyph" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-9.96 9.06l5.35 2.21a2.82 2.82 0 0 1 1.6-.49h.14l2.38-3.45v-.05a3.77 3.77 0 1 1 3.77 3.77h-.09l-3.4 2.43v.12a2.83 2.83 0 1 1-5.61.55l-3.83-1.59A10 10 0 1 0 12 2Zm-4.7 13.6 1.23.51a2.12 2.12 0 1 0 1.12-2.7l1.27.53a1.56 1.56 0 1 1-1.21 2.88l-1.31-.55a2.1 2.1 0 0 0-1.1-.67Zm9.98-4.04a2.51 2.51 0 1 1 0-5.02 2.51 2.51 0 0 1 0 5.02Zm0-.63a1.89 1.89 0 1 0 0-3.77 1.89 1.89 0 0 0 0 3.77Z"/></svg>
+      Wishlist
+    </a>
+  </header>
+
+  <div id="scroller">
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-art" data-parallax="0.10" aria-hidden="true">
+        <img src="assets/art/standoff2.jpg" alt="" fetchpriority="high" decoding="async">
+      </div>
+      <canvas class="hero-scar" id="scar" aria-hidden="true"></canvas>
+      <div class="hero-veil" aria-hidden="true"></div>
+      <canvas class="hero-embers" id="embers" aria-hidden="true"></canvas>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="warworn">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012 0.32" numOctaves="2" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="5"/>
+        </filter>
+      </svg>
+      <div class="hero-inner" id="hero-inner">
+        <p class="eyebrow reveal"><span class="eyebrow-dot" aria-hidden="true"></span>EARLY ACCESS &middot; WISHLIST OPEN ON STEAM</p>
+        <h1 class="hero-title" aria-label="Strike Wings">
+          <span class="hero-title-line" aria-hidden="true"><span class="ch" style="--i:0">S</span><span class="ch" style="--i:1">T</span><span class="ch" style="--i:2">R</span><span class="ch" style="--i:3">I</span><span class="ch" style="--i:4">K</span><span class="ch" style="--i:5">E</span></span>
+          <span class="hero-title-line" aria-hidden="true"><span class="ch" style="--i:3">W</span><span class="ch" style="--i:4">I</span><span class="ch" style="--i:5">N</span><span class="ch" style="--i:6">G</span><span class="ch" style="--i:7">S</span></span>
+        </h1>
+        <p class="hero-tag reveal">A top-down space-combat epic. Fifty warships.<br>Fleet actions. A civil war in its seventeenth year.</p>
+        <div class="hero-cta reveal">
+          <a class="steam-link btn btn-steam" href="#" rel="noopener" target="_blank" id="hero-steam">
+            <svg class="steam-glyph" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-9.96 9.06l5.35 2.21a2.82 2.82 0 0 1 1.6-.49h.14l2.38-3.45v-.05a3.77 3.77 0 1 1 3.77 3.77h-.09l-3.4 2.43v.12a2.83 2.83 0 1 1-5.61.55l-3.83-1.59A10 10 0 1 0 12 2Zm-4.7 13.6 1.23.51a2.12 2.12 0 1 0 1.12-2.7l1.27.53a1.56 1.56 0 1 1-1.21 2.88l-1.31-.55a2.1 2.1 0 0 0-1.1-.67Zm9.98-4.04a2.51 2.51 0 1 1 0-5.02 2.51 2.51 0 0 1 0 5.02Zm0-.63a1.89 1.89 0 1 0 0-3.77 1.89 1.89 0 0 0 0 3.77Z"/></svg>
+            WISHLIST ON STEAM
+          </a>
+          <a class="btn btn-ghost" href="#war">ENTER THE WAR</a>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#creed" aria-label="Scroll down">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ============ MANIFESTO ============ -->
+    <section class="manifesto" id="creed" aria-label="Premise">
+      <div class="flyby" data-fly="ltr" aria-hidden="true">
+        <div class="fighter" data-band="0.34" data-depth="1" data-wake="terran"><img src="assets/art/fly/terran_fighter_side1.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="fighter" data-band="0.52" data-depth="0.6" data-wake="terran"><img src="assets/art/fly/terran_fighter_side2.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="fighter" data-band="0.62" data-depth="0.42" data-wake="terran"><img src="assets/art/fly/terran_fighter_side3.png" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <p class="manifesto-text" data-wordfill>Earth has a <em>church.</em> Mars has a <em>shipyard.</em> Between them, <em>the war.</em></p>
+    </section>
+
+    <!-- ============ THE WAR ============ -->
+    <section class="section" id="war">
+      <div class="flyby" data-fly="rtl" aria-hidden="true">
+        <div class="fighter" data-band="0.40" data-depth="1" data-wake="ss"><img src="assets/art/fly/ss_fighter_side1.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="fighter" data-band="0.56" data-depth="0.6" data-wake="ss"><img src="assets/art/fly/ss_fighter_side2.png" alt="" loading="lazy" decoding="async"></div>
+        <div class="fighter" data-band="0.30" data-depth="0.44" data-wake="ss"><img src="assets/art/fly/ss_fighter_side3.png" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="container">
+        <div class="war-grid">
+          <div>
+            <p class="kicker reveal">THE PREMISE</p>
+            <h2 class="display reveal"><span class="ln"><span class="ln-i">THE LONG</span></span><span class="ln"><span class="ln-i">VIGIL</span></span></h2>
+          </div>
+          <div class="war-lede reveal">
+            <p>Humanity broke out of Sol, fought two long wars against her own runaway daughters, and buried her dead by the million. Earth drew inward. Her churches became her government. Mars, Earth&rsquo;s first colony and her heaviest industrial base, refused to follow.</p>
+            <p>In 2188 Mars broke from the Alliance and named itself after the insult Earth used to dismiss it: <em>the Stepping Stone</em>. The war that followed is the war you fly in.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="faceoff reveal" id="faceoff">
+        <img class="faceoff-bg" src="assets/art/earth_mars_faceoff.jpg" alt="Earth and Mars facing one another across the dark gulf of Sol, two fleet lines strung between them" loading="lazy" decoding="async">
+        <canvas class="faceoff-fx" id="faceoff-fx" aria-hidden="true"></canvas>
+        <div class="faceoff-veil" aria-hidden="true"></div>
+        <div class="faceoff-label faceoff-earth reveal">
+          <p class="faceoff-kicker">EARTH &middot; CRADLE OF MAN</p>
+          <p>Blue, and turning away. Eleven billion souls who made their church their government, and who will not fire a shot until the hymn is sung.</p>
+        </div>
+        <div class="faceoff-label faceoff-mars reveal" style="--d:0.12s">
+          <p class="faceoff-kicker">MARS &middot; THE STEPPING STONE</p>
+          <p>Red, and unbowed. The forge that built the cradle&rsquo;s fleet, then kept it, and took the insult for a name.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PANEL — fleet standoff ============ -->
+    <section class="panel" id="panel-fleet">
+      <div class="panel-art" data-parallax="0.12">
+        <img src="assets/art/calm/fleet.jpg" alt="Two fleets holding a silent standoff across an immense gulf of space, Mars a dim crescent below" loading="lazy" decoding="async" data-zoom>
+      </div>
+      <div class="panel-caption">
+        <p class="kicker reveal">FLEET ACTIONS</p>
+        <h2 class="display reveal"><span class="ln"><span class="ln-i">EVERY BATTLE</span></span><span class="ln"><span class="ln-i">IS A FLEET ACTION</span></span></h2>
+        <p class="reveal">Two hundred ships on the field. Squadron AI, named aces, carrier launches, and a kill feed that reads like a casualty list, because it is one.</p>
+      </div>
+    </section>
+
+    <!-- ============ THE GAME / SIM ============ -->
+    <section class="section" id="game">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker reveal">IN-ENGINE &middot; ACTUAL GAMEPLAY</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">THE SIM</span></span></h2>
+          <p class="lede reveal" style="margin-top:26px">Strike Wings plays from above, a full combat simulation in the lineage of the classic DOS era top down space ship shooter games: phosphor wireframes, Newtonian drift, and ordnance that fills the sky. What the paintings promise, the sim delivers.</p>
+        </div>
+
+        <div class="reel reveal">
+          <video id="reel" muted playsinline preload="metadata" poster="assets/video/hammerfall_poster.jpg" aria-label="In-engine combat footage: fleet battles, carrier strikes and capital sieges"></video>
+          <p class="reel-caption"><span id="reel-title">HAMMERFALL &middot; THE BOMBER STORM</span><span>COMBAT FOOTAGE &middot; IN-ENGINE</span></p>
+        </div>
+
+        <div class="shots-flow">
+          <figure class="shot shot-a" data-parallax="0.045">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; HAMMERFALL &middot; SHOCKWAVE OVER THE BOMBER STORM</figcaption>
+              <img src="assets/game/hammerfall_ring.jpg" alt="In-game screenshot: a huge orange shockwave ring swallowing a fighter wing while the kill feed scrolls" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot shot-b" data-parallax="-0.035">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; COLOSSI &middot; 2,366 TICKETS ON THE BOARD</figcaption>
+              <img src="assets/game/colossi_shockwaves.jpg" alt="In-game screenshot: overlapping shockwave rings and clustered fireballs in an attrition battle between supercarrier fleets" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot shot-c" data-parallax="0.03">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; DREADNAUGHTS MAKE FOR THE RINGS</figcaption>
+              <img src="assets/game/capitals_beams.jpg" alt="In-game screenshot: four capital ships in echelon riding golden engine wakes toward a ringed planet, one under beam fire" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot shot-d" data-parallax="-0.045">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; EIGHTY ON EIGHTY OVER THE GAS GIANT</figcaption>
+              <img src="assets/game/melee_rings.jpg" alt="In-game screenshot: fighter wings strafing over an immense ringed gas giant during a massed melee" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot shot-e" data-parallax="0.04">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; DD &ldquo;UNAWARE&rdquo; &middot; SHIELDS FLARE IN THE AMBUSH</figcaption>
+              <img src="assets/game/blackout_flare.jpg" alt="In-game screenshot: a destroyer's shields flaring blue-white under cloaked wraith attack, gold target hexagon around the hull" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot shot-f" data-parallax="-0.03">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; EARTHFALL &middot; THE STARBASE BREAKS</figcaption>
+              <img src="assets/game/earthfall_hulk.jpg" alt="In-game screenshot: a broken capital hulk drifting while a starbase section erupts in a ringed explosion" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot shot-g" data-parallax="0.035">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; FLAK BELT &middot; TWIN KILLS</figcaption>
+              <img src="assets/game/hammerfall_breakup.jpg" alt="In-game screenshot: twin fireballs among shield-flared bombers weaving through flak and blue plasma bolts" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot shot-h" data-parallax="-0.04">
+            <div class="reveal">
+              <figcaption>IN&#8209;ENGINE &middot; SINGLE COMBAT AT THE RINGS</figcaption>
+              <img src="assets/game/duel_lock.jpg" alt="In-game screenshot: a lone Reaper closing on a red-ringed target against a giant ringed planet" loading="lazy" decoding="async">
+            </div>
+          </figure>
+        </div>
+
+        <ul class="features">
+          <li class="reveal"><strong><span class="count" data-to="50">50</span>+ warships</strong><span>from disposable Ticks to Sovereign-class dreadnaughts</span></li>
+          <li class="reveal" style="--d:0.06s"><strong><span class="count" data-to="24">24</span> weapons</strong><span>Terran kinetics &amp; Selach-school beams: gatlings, rails, E-flux torpedoes</span></li>
+          <li class="reveal" style="--d:0.12s"><strong><span class="count" data-to="9">9</span> ship devices</strong><span>cloak, warp, pressor fields, orbital drones, power absorbers</span></li>
+          <li class="reveal" style="--d:0.18s"><strong><span class="count" data-to="170">170</span>+ scenarios</strong><span>plus a full battle editor to build your own fleet actions</span></li>
+          <li class="reveal"><strong>The storm</strong><span>a shrinking arena ends every battle; nobody runs out the clock</span></li>
+          <li class="reveal" style="--d:0.06s"><strong>2-player co-op</strong><span>split-screen local play &middot; gamepad &amp; Steam Deck ready</span></li>
+          <li class="reveal" style="--d:0.12s"><strong>Subsystem damage</strong><span>strip shields, silence turrets, breach reactors until hulls break into burning hulks</span></li>
+          <li class="reveal" style="--d:0.18s"><strong>Named aces</strong><span>squadron AI across 7 difficulty tiers, and aces rise mid-battle</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PANEL — capital warfare ============ -->
+    <section class="panel" id="panel-capital">
+      <div class="panel-art" data-parallax="0.12">
+        <img src="assets/art/calm/breach.jpg" alt="A colossal dreadnought broken by a single bright fracture of burning light, adrift in calm black space" loading="lazy" decoding="async" data-zoom>
+      </div>
+      <div class="panel-caption">
+        <p class="kicker reveal">CAPITAL WARFARE</p>
+        <h2 class="display reveal"><span class="ln"><span class="ln-i">BREAK THE</span></span><span class="ln"><span class="ln-i">IMMOVABLE</span></span></h2>
+        <p class="reveal">Dreadnaughts, super carriers, starbases: every capital hull is dismantled subsystem by subsystem until it tears into burning hulks. And every starbase carries exactly one Deathray. When the red designator paints you, move. Don&rsquo;t think.</p>
+      </div>
+    </section>
+
+    <!-- ============ AIRFRAME SURVEY ============ -->
+    <section class="survey" id="survey">
+      <div class="survey-pin" id="survey-pin">
+        <div class="survey-head">
+          <div class="container">
+            <p class="kicker reveal">THE AIRFRAME</p>
+            <p class="survey-sub reveal">SURVEY 042 &middot; ASHEN GABRIEL PROVING GROUNDS &middot; SF-102M VANGUARD</p>
+          </div>
+        </div>
+        <div class="survey-stage container">
+          <div class="survey-ship">
+            <div class="survey-layer survey-render" id="survey-render">
+              <img src="assets/art/fighter.png" alt="The SF-102M Vanguard — a green Terran strike fighter marked with red crosses, rendered in phosphor wireframe survey" loading="lazy" decoding="async" id="survey-img">
+            </div>
+            <div class="survey-layer survey-edges" id="survey-edges">
+              <canvas id="survey-canvas" aria-hidden="true"></canvas>
+            </div>
+            <div class="survey-scan" id="survey-scan"><span></span></div>
+          </div>
+          <ul class="survey-labels">
+            <li id="survey-l1"><span class="survey-tick"></span>SHIELD GENERATOR &middot; REGENERATES UNDER FIRE</li>
+            <li id="survey-l2"><span class="survey-tick"></span>WEAPON HARDPOINTS &middot; GATLINGS, RAILS, BEAMS, E-FLUX TORPEDOES</li>
+            <li id="survey-l3"><span class="survey-tick"></span>ARMOUR &middot; SUBSYSTEM PLATING, STRIPPED PANEL BY PANEL</li>
+            <li id="survey-l4"><span class="survey-tick"></span>ENGINES &middot; PHYSICS-AWARE THRUST, NEWTONIAN DRIFT</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHIP REGISTRY ============ -->
+    <section class="section" id="registry">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker reveal">THE HANGAR</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">SHIP REGISTRY</span></span></h2>
+        </div>
+        <div class="registry-groups reveal" id="registry-groups" role="tablist" aria-label="Choose a ship class"></div>
+        <div class="registry reveal">
+          <div class="registry-viewport" id="registry-viewport">
+            <img id="registry-wire" alt="Wireframe schematic of the RP-1A Reaper" decoding="async">
+            <canvas id="registry-canvas" role="img" aria-label="Rotating view of the RP-1A Reaper"></canvas>
+          </div>
+          <div class="registry-data">
+            <p class="registry-class" id="registry-class">MULTIROLE FIGHTER</p>
+            <h3 class="registry-name" id="registry-name">RP-1A REAPER</h3>
+            <p class="registry-story" id="registry-story">Drawn in 2113 and flown by the thousand on both sides by 2205. It shredded Talons in its first trial and Lancers in its second, so the Alliance reverse-engineered captured hulls and built its own. The war's definitive fighter.</p>
+            <div class="registry-stats" aria-label="Ship statistics">
+              <div class="stat"><span class="stat-label">SPD</span><span class="stat-bar"><span id="stat-spd"></span></span></div>
+              <div class="stat"><span class="stat-label">ARM</span><span class="stat-bar"><span id="stat-arm"></span></span></div>
+              <div class="stat"><span class="stat-label">SHL</span><span class="stat-bar"><span id="stat-shl"></span></span></div>
+              <div class="stat"><span class="stat-label">PWR</span><span class="stat-bar"><span id="stat-pwr"></span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="registry-picker reveal" id="registry-picker" role="tablist" aria-label="Choose a ship"></div>
+      </div>
+    </section>
+
+    <!-- ============ THE ULTIMATE TRAILER ============ -->
+    <section class="section cinema" id="trailer">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker reveal">THE SCREENING ROOM &middot; SEVEN CUTS &middot; SOUND ON</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">EVERYTHING</span></span><span class="ln"><span class="ln-i">YOU WANTED</span></span></h2>
+          <p class="lede reveal" style="margin-top:26px">Strike Wings is the ultimate retro space-ship shooter: sandbox modes, 170+ scenarios, a full campaign, and 24-player Steam and LAN multiplayer. Everything you ever wanted from the classics, in one place and drawn crisp. <em>Light as art, fireworks on a pitch-black canvas of sky.</em></p>
+        </div>
+        <figure class="cinema-figure reveal">
+          <div class="cutout-frame cinema-shell">
+            <div class="cinema-stage">
+              <video id="cinema-teaser" muted playsinline loop preload="metadata" poster="assets/video/trailer_poster.jpg" src="assets/video/trailer_teaser.mp4" aria-hidden="true"></video>
+              <video id="cinema-full" playsinline preload="none" aria-label="Strike Wings — the ultimate trailer, two minutes with sound"></video>
+              <button class="cinema-play" id="cinema-play" type="button" aria-label="Play the full trailer with sound">
+                <span class="cinema-play-ring" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+                <span class="cinema-play-label" id="cinema-play-label">PLAY THE FULL TRAILER</span>
+              </button>
+              <span class="cinema-track" id="cinema-track" aria-hidden="true"></span>
+            </div>
+          </div>
+          <figcaption class="reel-caption">
+            <span id="cinema-title">TEASER LOOP &middot; THE FULL TWO MINUTES, ONE CLICK AWAY</span>
+            <span>OCTOBER 2026 &middot; WISHLIST ON STEAM</span>
+          </figcaption>
+        </figure>
+
+        <div class="bill-head reveal" aria-hidden="true">
+          <span class="archive-divider-rule"></span>
+          <span class="archive-divider-label">ALSO SHOWING &middot; SIX SHORT CUTS &middot; CHOOSE A REEL</span>
+          <span class="archive-divider-rule"></span>
+        </div>
+        <div class="bill reveal" id="bill" aria-label="More trailers">
+          <button class="bill-card" type="button" data-src="assets/video/trailer_first_sortie.mp4" data-title="FIRST SORTIE &middot; FLY THE CRUSADE">
+            <img src="assets/video/posters/first_sortie.jpg" alt="First Sortie trailer poster: fighters skirting a burning black hole" loading="lazy" decoding="async">
+            <span class="bill-meta"><span class="bill-kicker">THE FIRST JUMP</span><span class="bill-name">FIRST SORTIE</span><span class="bill-dur">0:38</span></span>
+          </button>
+          <button class="bill-card" type="button" data-src="assets/video/trailer_the_eternal_war.mp4" data-title="THE ETERNAL WAR &middot; A PERSISTENT SECTOR WAR">
+            <img src="assets/video/posters/the_eternal_war.jpg" alt="The Eternal War trailer poster: the campaign war room star chart" loading="lazy" decoding="async">
+            <span class="bill-meta"><span class="bill-kicker">THE CAMPAIGN</span><span class="bill-name">THE ETERNAL WAR</span><span class="bill-dur">0:35</span></span>
+          </button>
+          <button class="bill-card" type="button" data-src="assets/video/trailer_frontier_anthology.mp4" data-title="FRONTIER ANTHOLOGY &middot; RAID. SIEGE. SURVIVE.">
+            <img src="assets/video/posters/frontier_anthology.jpg" alt="Frontier Anthology trailer poster: raiding an armored ore convoy under planetary rings" loading="lazy" decoding="async">
+            <span class="bill-meta"><span class="bill-kicker">THE SCENARIOS</span><span class="bill-name">FRONTIER ANTHOLOGY</span><span class="bill-dur">0:40</span></span>
+          </button>
+          <button class="bill-card" type="button" data-src="assets/video/trailer_the_forge.mp4" data-title="THE FORGE &middot; TICKETS. MODES. VICTORY RULES.">
+            <img src="assets/video/posters/the_forge.jpg" alt="The Forge trailer poster: the battle editor with a massed fleet placed in the final arena" loading="lazy" decoding="async">
+            <span class="bill-meta"><span class="bill-kicker">THE BATTLE EDITOR</span><span class="bill-name">THE FORGE</span><span class="bill-dur">0:33</span></span>
+          </button>
+          <button class="bill-card" type="button" data-src="assets/video/trailer_pilots_wall.mp4" data-title="PILOT&rsquo;S WALL &middot; EARN THEM IN EVERY MODE">
+            <img src="assets/video/posters/pilots_wall.jpg" alt="Pilot's Wall trailer poster: the garage with the Scorched Earth title plate" loading="lazy" decoding="async">
+            <span class="bill-meta"><span class="bill-kicker">THE SERVICE RECORD</span><span class="bill-name">PILOT&rsquo;S WALL</span><span class="bill-dur">0:34</span></span>
+          </button>
+          <button class="bill-card" type="button" data-src="assets/video/trailer_classic_reimagined.mp4" data-title="CLASSIC REIMAGINED &middot; AT A SCALE YOU ALWAYS WANTED">
+            <img src="assets/video/posters/classic_reimagined.jpg" alt="Classic Reimagined trailer poster: capital ships broadside between twin suns" loading="lazy" decoding="async">
+            <span class="bill-meta"><span class="bill-kicker">THE LINEAGE</span><span class="bill-name">CLASSIC REIMAGINED</span><span class="bill-dur">0:42</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE WAR ROOM ============ -->
+    <section class="section warroom" id="warroom">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker reveal">BEYOND THE COCKPIT</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">THE WAR</span></span><span class="ln"><span class="ln-i">ROOM</span></span></h2>
+          <p class="lede reveal" style="margin-top:26px">The war doesn&rsquo;t end when you land. Run a persistent sector campaign day by day, brief with prelates and admirals, forge your own battles in the editor, and hang every title you earn on the pilot&rsquo;s wall.</p>
+        </div>
+        <div class="warroom-grid">
+          <figure class="shot wr-hero">
+            <div class="reveal">
+              <figcaption>THE WAR ROOM &middot; ACTIVE FRONTS, DISPATCHES, A SECTOR WAR THAT REMEMBERS</figcaption>
+              <img src="assets/game/ui/warroom_ui_1.jpg" alt="In-game screenshot: the War Room campaign screen — a star chart of active fronts with fleet strength bars and a day-by-day dispatch ledger" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal">
+              <figcaption>OPERATIONAL BRIEFING &middot; CRADLE OF THE LAMB</figcaption>
+              <img src="assets/game/ui/campaign_briefing_1.jpg" alt="In-game screenshot: a campaign mission briefing titled Cradle of the Lamb with objective text" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.06s">
+              <figcaption>THE BRIEFING ROOM &middot; LORD PRELATE OTMAR VELK</figcaption>
+              <img src="assets/game/ui/campaign_briefing_2.jpg" alt="In-game screenshot: a campaign dialogue with Lord Prelate Otmar Velk, Voice of the Covenant" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal">
+              <figcaption>THE FORGE &middot; PLACE ANY FLEET ON ANY FIELD</figcaption>
+              <img src="assets/game/ui/editor_ui_1.jpg" alt="In-game screenshot: the battle editor vessel view with a massed fleet placed inside the final arena boundary" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.06s">
+              <figcaption>THE FORGE &middot; TICKETS, MODES, VICTORY RULES</figcaption>
+              <img src="assets/game/ui/editor_battle_ui_1.jpg" alt="In-game screenshot: the battle editor rules view — attrition mode with fighter and capital ticket pools and respawn delays" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal">
+              <figcaption>SHIP ENCYCLOPEDIA &middot; EVERY HULL ON FILE</figcaption>
+              <img src="assets/game/ui/encyclopedia_ui_1.jpg" alt="In-game screenshot: the ship encyclopedia opened on the RP-1A Reaper with characteristics, weaponry and background" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.06s">
+              <figcaption>THE GARAGE &middot; FORGE YOUR WINGTAG PLATE</figcaption>
+              <img src="assets/game/ui/garage_plates_1.jpg" alt="In-game screenshot: the garage title screen with earned titles list and plate gallery" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.12s">
+              <figcaption>THE GARAGE &middot; 138,502 KILLS INTO THE FOUNDER PLATE</figcaption>
+              <img src="assets/game/ui/garage_plates_2.jpg" alt="In-game screenshot: the garage showing the Founder plate over a pink nebula with title progress ledger" loading="lazy" decoding="async">
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CUTOUT — the rite of launch ============ -->
+    <section class="section rite" id="rite">
+      <div class="container cutout-grid">
+        <div class="cutout-copy">
+          <p class="kicker reveal">THE RITE OF LAUNCH</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">STEEL IS</span></span><span class="ln"><span class="ln-i">BAPTIZED</span></span></h2>
+          <p class="cutout-lede reveal">A warship launching from the Lunar Yards is a three-day public event. Chaplains walk the hull rail to rail, and the consecration hymnals, vast polyphonic choral works, are sung over open comms while the fleet holds station in the dark. Even Martians listen, in private. Then the ship is armed, and the war has one more name in it.</p>
+        </div>
+        <figure class="cutout reveal">
+          <div class="cutout-frame">
+            <img src="assets/art/art1.jpg" alt="Painting: a capital ship suspended in a cathedral drydock, a golden cross of light burning beneath it while Templar knights stand vigil" loading="lazy" decoding="async">
+          </div>
+          <figcaption>
+            <span>FLEET CONSECRATION &middot; LUNAR YARDS UNDER SAINT MICHAEL&rsquo;S SPIRE</span>
+            <span>MINISTRY OF MEMORY</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ FACTIONS / THIRD POWER ============ -->
+    <section class="section" id="factions">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker reveal">POWERS OF SOL</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">THREE FLAGS.</span></span><span class="ln"><span class="ln-i">NO TRUCE.</span></span></h2>
+          <p class="lede reveal" style="margin-top:26px">Two flags fight the war. A third was built to profit from it, and both sides keep it in business.</p>
+        </div>
+        <div class="crests crests-stack reveal">
+          <article class="crest" data-wake="fire">
+            <div class="crest-ghost" data-parallax="-0.05" aria-hidden="true">
+              <img src="assets/art/terran_logo.png" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="crest-body">
+              <p class="crest-index">FIRST POWER &middot; EARTH</p>
+              <h3>THE TERRAN ALLIANCE</h3>
+              <p class="crest-motto">&ldquo;The sword is holy.&rdquo;</p>
+              <p>Earth fought two unwinnable wars against her own runaway daughters, buried a century of dead, and drew inward. Across sixty years (the Templar Turn, 2120 to 2180) a traumatised republic drifted, one reasonable accommodation at a time, into a theocracy: the Aethon Covenant, six ecclesiastical Orders, a Synod where the navy used to be. Eleven billion souls now launch warships only after a chaplain raises the monstrance. Green hull, red cross, and the finest kinetic weapons in known space.</p>
+            </div>
+          </article>
+          <article class="crest" data-wake="ash">
+            <div class="crest-ghost" data-parallax="-0.07" aria-hidden="true">
+              <img src="assets/art/ss_logo.png" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="crest-body">
+              <p class="crest-index">SECOND POWER &middot; MARS</p>
+              <h3>THE STEPPING STONE ALLIANCE</h3>
+              <p class="crest-motto">&ldquo;That which is built is sacred.&rdquo;</p>
+              <p>Mars built most of Earth&rsquo;s fleet and refused Earth&rsquo;s faith. To a workers&rsquo; democracy of welders and engineers, priests at the gunnery board were simply insane. When Earth made the Covenant a condition of trade, Mars broke away in 2188 and took the slur Earth used to dismiss it, the Stepping Stone, as its name. Pell-pattern shields under open Halcyon licence, yards that launch a warship a day, grey Martian steel. The Reaper is theirs; so is the future, if they hold.</p>
+            </div>
+          </article>
+          <article class="crest" data-wake="plume">
+            <div class="crest-ghost" data-parallax="-0.05" aria-hidden="true">
+              <img src="assets/art/consortium_logo.png" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="crest-body">
+              <p class="crest-index">THIRD POWER &middot; THE CHARTER</p>
+              <h3>THE CONSORTIUM</h3>
+              <p class="crest-motto">&ldquo;The bid that prints.&rdquo;</p>
+              <p>The third power neither flag will admit is a power. It began with the Tharsis Mutiny of 2167, when three captains refused to fire on civilian rescue traffic, were bought out, and walked off Mars aboard a retired dreadnaught. Today it is a chartered mercenary state of forty-two Wings under Concord law. The seventeen-year war breeds a backlog of work line crews won&rsquo;t touch: contested-corridor escort, asset retrieval, deniable strikes, capital recovery. The Consortium clears it for cash. No flag, no sectarian preference, a contract from the Iron Lamb and its counter from the SSA in the same week. Both navies hire it; both resent it; neither can afford to dissolve it. Its sodium-yellow plume is a warning and a brand at once: <em>we want you to see us coming.</em></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CUTOUT — the frontier ============ -->
+    <section class="section frontier" id="frontier">
+      <div class="container cutout-grid cutout-grid-flip">
+        <div class="cutout-copy">
+          <p class="kicker reveal">THE FRONTIER</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">THE WAR LIVES</span></span><span class="ln"><span class="ln-i">AT THE EDGES</span></span></h2>
+          <p class="cutout-lede reveal">Patrol Outpost Saint Gabriel, 82 Eridani outer system. One Talon squadron, a repair slip, and a sign that asks every pilot to speed the word. Neither fleet can land on the other&rsquo;s homeworld and hold it, so the war is fought at places nobody on either world had heard of until the casualty lists arrived.</p>
+        </div>
+        <figure class="cutout reveal">
+          <div class="cutout-frame">
+            <img src="assets/art/art11.jpg" alt="Painting: Patrol Outpost Saint Gabriel — a domed cathedral outpost on a storm-grey frontier world, fighters lifting off past its cross" loading="lazy" decoding="async">
+          </div>
+          <figcaption>
+            <span>PATROL OUTPOST SAINT GABRIEL &middot; 82 ERIDANI OUTER SYSTEM</span>
+            <span>&ldquo;SPEED THE WORD.&rdquo; &middot; LUKE 1:19</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ KNOWN SPHERE ============ -->
+    <section class="section" id="sphere">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker reveal">THE KNOWN SPHERE &middot; LIVE TACTICAL PLOT</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">TWENTY-TWO</span></span><span class="ln"><span class="ln-i">LIGHT-YEARS</span></span></h2>
+          <p class="lede reveal" style="margin-top:26px">Five human powers. A mercenary charter. Seven salvage Houses. And at the north-west edge of the chart, a single red <em>?</em>: the system the SSAV <em>Yeats</em> reached in 2187 and never came home from. The torpedoes still arrive.</p>
+        </div>
+      </div>
+      <div class="sphere-chart reveal">
+        <canvas id="starmap" role="img" aria-label="Live three-dimensional chart of the Known Sphere: sixteen star systems within twenty-two light-years of Sol, joined by jump lanes, trade lanes, war fronts and raid corridors — and one anomaly line running from the Uncharted Cluster to Ross 128"></canvas>
+      </div>
+      <div class="container">
+        <div class="sphere-legend reveal" aria-hidden="true">
+          <span><i style="--c:rgba(80,220,120,0.9)"></i>ALLIANCE LANE</span>
+          <span><i style="--c:rgba(200,164,92,0.9)"></i>TRADE LANE</span>
+          <span><i style="--c:rgba(220,80,90,0.9)"></i>WAR FRONT</span>
+          <span><i style="--c:rgba(255,170,60,0.9)"></i>RAID CORRIDOR</span>
+          <span><i style="--c:rgba(200,40,50,1)"></i>ANOMALY</span>
+        </div>
+        <p class="sphere-caption reveal">MINISTRY OF CARTOGRAPHY &middot; TERRAN ALLIANCE &middot; PLOT REFRESHED 2205 CS &middot; VERUM IN TABULIS</p>
+      </div>
+    </section>
+
+    <!-- ============ GUN CAMERA ARCHIVE ============ -->
+    <section class="section archive" id="archive">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker reveal">RECOVERED FOOTAGE &middot; GUN CAMERA</p>
+          <h2 class="display reveal"><span class="ln"><span class="ln-i">THE ARCHIVE</span></span></h2>
+          <p class="lede reveal" style="margin-top:26px">Every wing that flies, records. Not every wing comes home. What the recovery tugs cut out of the wreckage is catalogued here: the war exactly as the sim fought it, frame by frame.</p>
+        </div>
+
+        <div class="archive-reels">
+          <div class="reel reveal">
+            <video id="reel-fleet" muted playsinline preload="metadata" poster="assets/video/earthfall_poster.jpg" aria-label="In-engine footage: full fleet actions — hundreds of ships committed in the battle for Sol"></video>
+            <p class="reel-caption"><span id="reel-fleet-title">EARTHFALL &middot; THE BATTLE FOR SOL</span><span>FLEET ACTIONS</span></p>
+          </div>
+          <div class="reel reveal" style="--d:0.08s">
+            <video id="reel-capital" muted playsinline preload="metadata" poster="assets/video/capitals_poster.jpg" aria-label="In-engine footage: capital warfare — dreadnaughts, ambushed destroyers and storm-ring slugfests"></video>
+            <p class="reel-caption"><span id="reel-capital-title">CAPITALS STACKED FOR GLORY</span><span>CAPITAL WARFARE</span></p>
+          </div>
+          <div class="reel reveal" style="--d:0.16s">
+            <video id="reel-wing" muted playsinline preload="metadata" poster="assets/video/duel_poster.jpg" aria-label="In-engine footage: wing actions — single combat, cloaked ambushes and war in the asteroid belt"></video>
+            <p class="reel-caption"><span id="reel-wing-title">SINGLE COMBAT &middot; REAPER AGAINST REAPER</span><span>WING ACTIONS</span></p>
+          </div>
+        </div>
+
+        <div class="archive-divider reveal" aria-hidden="true">
+          <span class="archive-divider-rule"></span>
+          <span class="archive-divider-label">RECOVERED STILLS &middot; SINGLE FRAMES, CATALOGUED</span>
+          <span class="archive-divider-rule"></span>
+        </div>
+
+        <div class="archive-stills">
+          <figure class="shot">
+            <div class="reveal">
+              <figcaption>COLOSSI &middot; FIREBALL BOUQUET</figcaption>
+              <img src="assets/game/colossi_fireballs.jpg" alt="In-game screenshot: a cluster of fireballs blooming amid debris in a supercarrier engagement" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.06s">
+              <figcaption>EARTHFALL &middot; HULKS ADRIFT</figcaption>
+              <img src="assets/game/earthfall_wreck.jpg" alt="In-game screenshot: a burning carrier hulk drifting past a trio of ringed fireballs" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.12s">
+              <figcaption>CAPITAL ECHELON UNDERWAY</figcaption>
+              <img src="assets/game/capitals_echelon.jpg" alt="In-game screenshot: three dreadnoughts in echelon formation riding golden engine wakes toward planetary rings" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal">
+              <figcaption>TAS &ldquo;IRON LAMB&rdquo; &middot; ORION DRIFT</figcaption>
+              <img src="assets/game/nebula_dreadnought.jpg" alt="In-game screenshot: a lone dreadnought cruising through the violet Orion nebula" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.06s">
+              <figcaption>GAUNTLET &middot; RUN THE NEEDLE</figcaption>
+              <img src="assets/game/gauntlet_furball.jpg" alt="In-game screenshot: a dense dogfight of gold-outlined fighters, ringed explosions and tracer streams" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.12s">
+              <figcaption>EYEWALL &middot; TRACER STORM</figcaption>
+              <img src="assets/game/eyewall_tracers.jpg" alt="In-game screenshot: a fighter weaving through diagonal storms of red and white tracer fire" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal">
+              <figcaption>DD &ldquo;SENTINEL&rdquo; &middot; BEAMS THROUGH THE DEBRIS</figcaption>
+              <img src="assets/game/wolfpack_beams.jpg" alt="In-game screenshot: a destroyer firing four golden beam lances downward through a debris field" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.06s">
+              <figcaption>COMETSTORM &middot; ONE CONFIRMED</figcaption>
+              <img src="assets/game/cometstorm_kill.jpg" alt="In-game screenshot: a ringed fireball kill among comet streaks as fighters scatter" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.12s">
+              <figcaption>BLACKOUT &middot; THEY WERE NEVER THERE</figcaption>
+              <img src="assets/game/blackout_ambush.jpg" alt="In-game screenshot: a hexed destroyer burning at the engines while cloaked wraiths flare into visibility around it" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal">
+              <figcaption>CVE &ldquo;RACKER&rdquo; &middot; TARGET LOCK</figcaption>
+              <img src="assets/game/racker_lock.jpg" alt="In-game screenshot: a pocket carrier bracketed in the target-lock overlay, shields flaring under escort fire" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.06s">
+              <figcaption>MELEE &middot; SUN-FLARE FINISH</figcaption>
+              <img src="assets/game/melee_flare.jpg" alt="In-game screenshot: the ringed gas giant looming over scattered fighters as a kill flares like a small sun" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <figure class="shot">
+            <div class="reveal" style="--d:0.12s">
+              <figcaption>OBJECTIVE &middot; DESTROY BS ANVIL</figcaption>
+              <img src="assets/game/anvil_belt.jpg" alt="In-game screenshot: a Talon bracketed among asteroids with the objective Destroy BS Anvil on the radar bezel" loading="lazy" decoding="async">
+            </div>
+          </figure>
+        </div>
+
+        <div class="archive-divider reveal" aria-hidden="true">
+          <span class="archive-divider-rule"></span>
+          <span class="archive-divider-label">NEW ACCESSIONS &middot; RECOVERY BATCH 2205&#8209;07 &middot; 42 FRAMES</span>
+          <span class="archive-divider-rule"></span>
+        </div>
+
+        <div class="archive-sheet reveal">
+          <figure class="shot"><figcaption>ANVIL ASSAULT &middot; I</figcaption><img src="assets/game/stills/anvil_assault_1.jpg" alt="In-game screenshot: Anvil Assault, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>ANVIL ASSAULT &middot; II</figcaption><img src="assets/game/stills/anvil_assault_2.jpg" alt="In-game screenshot: Anvil Assault, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>ANVIL ASSAULT &middot; III</figcaption><img src="assets/game/stills/anvil_assault_3.jpg" alt="In-game screenshot: Anvil Assault, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>ARES SQUALL &middot; I</figcaption><img src="assets/game/stills/ares_squall_1.jpg" alt="In-game screenshot: Ares Squall, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>ARES SQUALL &middot; II</figcaption><img src="assets/game/stills/ares_squall_2.jpg" alt="In-game screenshot: Ares Squall, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>ARES SQUALL &middot; III</figcaption><img src="assets/game/stills/ares_squall_3.jpg" alt="In-game screenshot: Ares Squall, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>AURORA DANCE &middot; I</figcaption><img src="assets/game/stills/aurora_dance_1.jpg" alt="In-game screenshot: Aurora Dance, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>AURORA DANCE &middot; II</figcaption><img src="assets/game/stills/aurora_dance_2.jpg" alt="In-game screenshot: Aurora Dance, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>AURORA DANCE &middot; III</figcaption><img src="assets/game/stills/aurora_dance_3.jpg" alt="In-game screenshot: Aurora Dance, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>AURORA KNIVES &middot; I</figcaption><img src="assets/game/stills/aurora_knives_1.jpg" alt="In-game screenshot: Aurora Knives, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>AURORA KNIVES &middot; II</figcaption><img src="assets/game/stills/aurora_knives_2.jpg" alt="In-game screenshot: Aurora Knives, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>AURORA KNIVES &middot; III</figcaption><img src="assets/game/stills/aurora_knives_3.jpg" alt="In-game screenshot: Aurora Knives, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>BINARY FLEET &middot; I</figcaption><img src="assets/game/stills/binary_fleet_1.jpg" alt="In-game screenshot: Binary Fleet, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>BINARY FLEET &middot; II</figcaption><img src="assets/game/stills/binary_fleet_2.jpg" alt="In-game screenshot: Binary Fleet, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>BINARY FLEET &middot; III</figcaption><img src="assets/game/stills/binary_fleet_3.jpg" alt="In-game screenshot: Binary Fleet, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>CINDER REVEAL &middot; I</figcaption><img src="assets/game/stills/cinder_reveal_1.jpg" alt="In-game screenshot: Cinder Reveal, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>CINDER REVEAL &middot; II</figcaption><img src="assets/game/stills/cinder_reveal_2.jpg" alt="In-game screenshot: Cinder Reveal, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>CINDER REVEAL &middot; III</figcaption><img src="assets/game/stills/cinder_reveal_3.jpg" alt="In-game screenshot: Cinder Reveal, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>MAGMA BRAWL &middot; I</figcaption><img src="assets/game/stills/magma_brawl_1.jpg" alt="In-game screenshot: Magma Brawl, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>MAGMA BRAWL &middot; II</figcaption><img src="assets/game/stills/magma_brawl_2.jpg" alt="In-game screenshot: Magma Brawl, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>MAGMA BRAWL &middot; III</figcaption><img src="assets/game/stills/magma_brawl_3.jpg" alt="In-game screenshot: Magma Brawl, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>LONE REAPER &middot; RED GIANT</figcaption><img src="assets/game/stills/red_giant_lone_reaper_1.jpg" alt="In-game screenshot: a lone Reaper silhouetted against a red giant star" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>HERO OF THE RED GIANT &middot; I</figcaption><img src="assets/game/stills/redgiant_hero_1.jpg" alt="In-game screenshot: Red Giant Hero, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>HERO OF THE RED GIANT &middot; II</figcaption><img src="assets/game/stills/redgiant_hero_2.jpg" alt="In-game screenshot: Red Giant Hero, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>HERO OF THE RED GIANT &middot; III</figcaption><img src="assets/game/stills/redgiant_hero_3.jpg" alt="In-game screenshot: Red Giant Hero, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STARFALL FURBALL &middot; I</figcaption><img src="assets/game/stills/starfall_furball_1.jpg" alt="In-game screenshot: Starfall Furball, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STARFALL FURBALL &middot; II</figcaption><img src="assets/game/stills/starfall_furball_2.jpg" alt="In-game screenshot: Starfall Furball, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STARFALL FURBALL &middot; III</figcaption><img src="assets/game/stills/starfall_furball_3.jpg" alt="In-game screenshot: Starfall Furball, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STARFALL LINE &middot; I</figcaption><img src="assets/game/stills/starfall_line_1.jpg" alt="In-game screenshot: Starfall Line, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STARFALL LINE &middot; II</figcaption><img src="assets/game/stills/starfall_line_2.jpg" alt="In-game screenshot: Starfall Line, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STARFALL LINE &middot; III</figcaption><img src="assets/game/stills/starfall_line_3.jpg" alt="In-game screenshot: Starfall Line, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STARFALL LINE &middot; IV</figcaption><img src="assets/game/stills/starfall_line_4.jpg" alt="In-game screenshot: Starfall Line, frame four" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STORM BROADSIDE &middot; I</figcaption><img src="assets/game/stills/storm_broadside_1.jpg" alt="In-game screenshot: Storm Broadside, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STORM BROADSIDE &middot; II</figcaption><img src="assets/game/stills/storm_broadside_2.jpg" alt="In-game screenshot: Storm Broadside, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STORM BROADSIDE &middot; III</figcaption><img src="assets/game/stills/storm_broadside_3.jpg" alt="In-game screenshot: Storm Broadside, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STORM BROADSIDE &middot; IV</figcaption><img src="assets/game/stills/storm_broadside_4.jpg" alt="In-game screenshot: Storm Broadside, frame four" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STORM CLOUDFIRE &middot; I</figcaption><img src="assets/game/stills/storm_cloudfire_1.jpg" alt="In-game screenshot: Storm Cloudfire, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STORM CLOUDFIRE &middot; II</figcaption><img src="assets/game/stills/storm_cloudfire_2.jpg" alt="In-game screenshot: Storm Cloudfire, frame two" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>STORM CLOUDFIRE &middot; III</figcaption><img src="assets/game/stills/storm_cloudfire_3.jpg" alt="In-game screenshot: Storm Cloudfire, frame three" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>THE FLEET ASSEMBLES</figcaption><img src="assets/game/stills/title_flyby_1.jpg" alt="In-game screenshot: the Strike Wings title screen, a fleet cruising over an orange gas giant" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>WAR SORTIE &middot; I</figcaption><img src="assets/game/stills/war_sortie_1.jpg" alt="In-game screenshot: War Sortie, frame one" loading="lazy" decoding="async"></figure>
+          <figure class="shot"><figcaption>WAR SORTIE &middot; II</figcaption><img src="assets/game/stills/war_sortie_2.jpg" alt="In-game screenshot: War Sortie, frame two" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE VIGIL ROLL ============ -->
+    <section class="roll" id="roll" aria-label="The vigil roll — ships lost to the war">
+      <div class="container">
+        <p class="kicker reveal">YEAR SEVENTEEN &middot; THE PRICE</p>
+        <h2 class="display reveal" style="font-size:clamp(34px,4vw,62px)"><span class="ln"><span class="ln-i">THE VIGIL ROLL</span></span></h2>
+      </div>
+      <div class="roll-viewport reveal">
+        <div class="roll-track">
+          <ul class="roll-list">
+            <li class="r-ta"><b>TAS IGNES</b><span>CRUISER &middot; RAMMED A REAVER FRIGATE &middot; ARATHIL CAMPAIGN, 2092</span></li>
+            <li class="r-ssa"><b>SSAV YEATS</b><span>DEEP SURVEY &middot; NEVER CAME HOME &middot; UNCHARTED CLUSTER, 2187</span></li>
+            <li class="r-ta"><b>TAS SAINT VARDAMAN</b><span>DESTROYER &middot; LOST WITH ALL HANDS &middot; TAU CETI PICKET, 2199</span></li>
+            <li class="r-ssa"><b>SSAV NERUDA</b><span>CONVOY ESCORT &middot; BROKE THE BLOCKADE TWICE &middot; EPSILON INDI, 2201</span></li>
+            <li class="r-ta"><b>TAS MONSTRANCE</b><span>FRIGATE &middot; HELD THE LANE FOR NINE HOURS &middot; 82 ERIDANI SHELL, 2202</span></li>
+            <li class="r-ssa"><b>SSAV SZYMBORSKA</b><span>STRIKE CARRIER &middot; ALL FIGHTERS RECOVERED, SHIP LOST &middot; PROCYON APPROACHES, 2202</span></li>
+            <li class="r-co"><b>CMV GOLDEN MEAN</b><span>CONSORTIUM WING 17 &middot; CONTRACT FULFILLED &middot; NEW ANTWERP, 2203</span></li>
+            <li class="r-ta"><b>TAS CANTICLE</b><span>BOMBER TENDER &middot; REACTOR BREACH &middot; HALFPENNY HOLDING, 2203</span></li>
+            <li class="r-ssa"><b>SSAV MANDELSTAM</b><span>RAIL DESTROYER &middot; SEVEN KILLS, THEN SILENCE &middot; JUMPGATE ROW, 2204</span></li>
+            <li class="r-ta"><b>TAS SPEED THE WORD</b><span>COURIER &middot; THE WORD ARRIVED &middot; SAINT GABRIEL, 2204</span></li>
+            <li class="r-ssa"><b>SSAV WHITMAN</b><span>REPAIR TENDER &middot; STAYED FOR THE WOUNDED &middot; STEPPERS&rsquo; REACH CONVOY, 2204</span></li>
+            <li class="r-ta"><b>TAS AETHON&rsquo;S GRACE</b><span>CRUISER &middot; CHOIR STILL ON OPEN COMMS WHEN SHE WENT &middot; LUNA RELIEF, 2205</span></li>
+            <li class="r-ssa"><b>SSAV BRODSKY</b><span>LINE FRIGATE &middot; THE HULL MADE OLYMPUS, THE CREW DID NOT &middot; CYDONIA RUN, 2205</span></li>
+            <li class="r-unk"><b>CONTACT 2205-114</b><span>UNKNOWN HULL &middot; STILL ARRIVING &middot; ROSS 128 BEARING, 2205</span></li>
+          </ul>
+          <ul class="roll-list" aria-hidden="true">
+            <li class="r-ta"><b>TAS IGNES</b><span>CRUISER &middot; RAMMED A REAVER FRIGATE &middot; ARATHIL CAMPAIGN, 2092</span></li>
+            <li class="r-ssa"><b>SSAV YEATS</b><span>DEEP SURVEY &middot; NEVER CAME HOME &middot; UNCHARTED CLUSTER, 2187</span></li>
+            <li class="r-ta"><b>TAS SAINT VARDAMAN</b><span>DESTROYER &middot; LOST WITH ALL HANDS &middot; TAU CETI PICKET, 2199</span></li>
+            <li class="r-ssa"><b>SSAV NERUDA</b><span>CONVOY ESCORT &middot; BROKE THE BLOCKADE TWICE &middot; EPSILON INDI, 2201</span></li>
+            <li class="r-ta"><b>TAS MONSTRANCE</b><span>FRIGATE &middot; HELD THE LANE FOR NINE HOURS &middot; 82 ERIDANI SHELL, 2202</span></li>
+            <li class="r-ssa"><b>SSAV SZYMBORSKA</b><span>STRIKE CARRIER &middot; ALL FIGHTERS RECOVERED, SHIP LOST &middot; PROCYON APPROACHES, 2202</span></li>
+            <li class="r-co"><b>CMV GOLDEN MEAN</b><span>CONSORTIUM WING 17 &middot; CONTRACT FULFILLED &middot; NEW ANTWERP, 2203</span></li>
+            <li class="r-ta"><b>TAS CANTICLE</b><span>BOMBER TENDER &middot; REACTOR BREACH &middot; HALFPENNY HOLDING, 2203</span></li>
+            <li class="r-ssa"><b>SSAV MANDELSTAM</b><span>RAIL DESTROYER &middot; SEVEN KILLS, THEN SILENCE &middot; JUMPGATE ROW, 2204</span></li>
+            <li class="r-ta"><b>TAS SPEED THE WORD</b><span>COURIER &middot; THE WORD ARRIVED &middot; SAINT GABRIEL, 2204</span></li>
+            <li class="r-ssa"><b>SSAV WHITMAN</b><span>REPAIR TENDER &middot; STAYED FOR THE WOUNDED &middot; STEPPERS&rsquo; REACH CONVOY, 2204</span></li>
+            <li class="r-ta"><b>TAS AETHON&rsquo;S GRACE</b><span>CRUISER &middot; CHOIR STILL ON OPEN COMMS WHEN SHE WENT &middot; LUNA RELIEF, 2205</span></li>
+            <li class="r-ssa"><b>SSAV BRODSKY</b><span>LINE FRIGATE &middot; THE HULL MADE OLYMPUS, THE CREW DID NOT &middot; CYDONIA RUN, 2205</span></li>
+            <li class="r-unk"><b>CONTACT 2205-114</b><span>UNKNOWN HULL &middot; STILL ARRIVING &middot; ROSS 128 BEARING, 2205</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <p class="roll-coda reveal">The roll is long. The Vigil is longer.</p>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="finale" id="wishlist">
+      <div class="finale-glow" aria-hidden="true"></div>
+      <div class="finale-ship reveal" data-parallax="-0.16" aria-hidden="true">
+        <img src="assets/art/mars_ship_cut.png" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="finale-inner">
+        <p class="kicker reveal" style="justify-self:center">EARLY ACCESS &middot; WINDOWS / MACOS / STEAM DECK</p>
+        <h2 class="display display-xl reveal"><span class="ln"><span class="ln-i">THE WAR</span></span><span class="ln"><span class="ln-i">NEEDS PILOTS</span></span></h2>
+        <p class="finale-tag reveal">Be there at first jump. Wishlisting on Steam is the single biggest thing you can do for a small fleet.</p>
+        <div class="reveal">
+          <a class="steam-link btn btn-steam btn-large" href="#" rel="noopener" target="_blank" id="finale-steam">
+            <svg class="steam-glyph" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-9.96 9.06l5.35 2.21a2.82 2.82 0 0 1 1.6-.49h.14l2.38-3.45v-.05a3.77 3.77 0 1 1 3.77 3.77h-.09l-3.4 2.43v.12a2.83 2.83 0 1 1-5.61.55l-3.83-1.59A10 10 0 1 0 12 2Zm-4.7 13.6 1.23.51a2.12 2.12 0 1 0 1.12-2.7l1.27.53a1.56 1.56 0 1 1-1.21 2.88l-1.31-.55a2.1 2.1 0 0 0-1.1-.67Zm9.98-4.04a2.51 2.51 0 1 1 0-5.02 2.51 2.51 0 0 1 0 5.02Zm0-.63a1.89 1.89 0 1 0 0-3.77 1.89 1.89 0 0 0 0 3.77Z"/></svg>
+            WISHLIST ON STEAM
+          </a>
+        </div>
+        <p class="finale-social reveal">FOLLOW THE CAMPAIGN: <a href="https://www.youtube.com/@strikewingsgames" rel="noopener" target="_blank">YOUTUBE</a> <span class="finale-social-sep" aria-hidden="true">&middot;</span> <a href="https://www.reddit.com/r/StrikeWings/" rel="noopener" target="_blank">r/StrikeWings</a> <span class="finale-social-sep" aria-hidden="true">&middot;</span> <a href="https://x.com/StrikeWingsGame" rel="noopener" target="_blank">@StrikeWingsGame</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <p>STRIKE&nbsp;WINGS © 2026. An original game — a retro homage inspired by classics like <em>Solar Winds</em> and <em>Hell Fighter 32</em>.</p>
+      <p><a href="https://www.youtube.com/@strikewingsgames" rel="noopener" target="_blank">YouTube</a> &middot; <a href="https://www.reddit.com/r/StrikeWings/" rel="noopener" target="_blank">r/StrikeWings</a> &middot; <a href="https://x.com/StrikeWingsGame" rel="noopener" target="_blank">X</a></p>
+    </div>
+  </footer>
+  </div><!-- /#scroller -->
+
+  <script src="js/main.js" defer></script>
+  <script src="js/ships.js?v=3" defer></script>
+</body>
+</html>
